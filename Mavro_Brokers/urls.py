@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Mavro_Brokers.views import view_registrarTransaccion
+from Mavro_Brokers.views import landingPage, dashboard
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('RegistrarTransaccion/', view_registrarTransaccion, name='registrarTransaccion')
+    path('', landingPage, name='landingPage'),
+    path('dashboard/', dashboard, name="dashboard"),
+    path('dashboard/', include('apps.registrarTransacciones.urls'))
 ]
