@@ -9,8 +9,7 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length= 50, blank=True, null=True)
     telefono = models.CharField(max_length= 50, blank=True, null=True)
     mail = models.CharField(max_length= 50, blank=True, null=True)
-    ingreso = models.CharField(max_length= 50, blank=True, null=True)
-    egreso = models.CharField(max_length= 50, blank=True, null=True)
+    saldo = models.IntegerField(max_length= 50, blank=True, null=True)
     fecha_alta = models.DateField(auto_now=True,auto_now_add=False)
 
     class Meta:
@@ -24,7 +23,7 @@ class Cliente(models.Model):
 class Transaccion(models.Model):
     id_transaccion = models.AutoField(primary_key=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    valor = models.CharField(max_length= 50, blank=True, null=True)
+    valor = models.IntegerField(max_length= 50, blank=True, null=True)
     tipo = models.CharField(max_length= 50, blank=True, null=True)
     fecha_alta = models.DateField(auto_now=True,auto_now_add=False)
 
