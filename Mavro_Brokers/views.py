@@ -2,8 +2,11 @@ from django.shortcuts import render
 from datetime import date
 from datetime import datetime
 
-def view_registrarTransaccion(request):
-    return render(request, "index.html")
+def dashboard(request):
+    return render(request, "dashboard.html")
+
+def landingPage(request):
+    return render(request, "landingPage.html")
 
 
 class MB:
