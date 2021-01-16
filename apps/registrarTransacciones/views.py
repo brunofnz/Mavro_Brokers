@@ -40,7 +40,6 @@ def registrarTransaccion(request):
     else:
         print("NO POST")
         transaccion_form = TransaccionForm()
-        print(transaccion_form)
     return render(request,'registrarTransaccion.html',{'transaccion_form':transaccion_form})
 
 def ingresarMonto(con,nombre,apellido, valor):
