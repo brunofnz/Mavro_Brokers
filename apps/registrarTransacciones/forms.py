@@ -1,8 +1,8 @@
 from django import forms
-from .models import Transaccion
+from .models import Transaccion, Cliente
 
 class TransaccionForm(forms.ModelForm):
-    opciones = [(1,'ingresar'),(2,'egresar')]
+    opciones = [('ingresar','ingresar'),('egresar','egresar')]
     tipo = forms.ChoiceField(widget=forms.Select, choices=opciones)
     class Meta:
         model = Transaccion
@@ -10,4 +10,16 @@ class TransaccionForm(forms.ModelForm):
             'cliente',
             'valor',
             'tipo'
+        ]
+
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = [
+            'id_usuario',
+            'apellido',
+            'nombre',
+            'telefono',
+            'mail',
+            'saldo'
         ]
