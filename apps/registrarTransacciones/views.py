@@ -1,14 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Transaccion
-from .forms import TransaccionForm
+from .models import Transaccion, Cliente
+from .forms import TransaccionForm, ClienteForm
 import sqlite3
 
 # Create your views here.
-class Cliente:
-    def __init__(self, apellido, nombre, saldo):
-        apellido = self.apellido
-        nombre = self.nombre
-        saldo = self.saldo
+
 
 con = sqlite3.connect('db.sqlite3', check_same_thread=False)
 
@@ -36,11 +32,27 @@ def registrarTransaccion(request):
                 except(e):
                     print("hubo un error")
                     print(e)
-            return redirect('dashboard')
+            return redirect('listaTransacciones')
     else:
         print("NO POST")
         transaccion_form = TransaccionForm()
     return render(request,'registrarTransaccion.html',{'transaccion_form':transaccion_form})
+
+def registrarCliente(request):
+    if request.method == 'POST':
+        cliente_form = ClienteForm(request.POST)
+        if cliente_form.is_valid():
+            print("Formulario valido")
+            try:
+                cliente_form.save()
+            except(e):
+                print("hubo un error")
+                print(e)
+        return redirect('listaClientes')
+    else:
+        print("NO POST")
+        cliente_form = ClienteForm()
+    return render(request,'registrarCliente.html',{'cliente_form':cliente_form})    
 
 def ingresarMonto(con,nombre,apellido, valor):
     
@@ -110,13 +122,13 @@ def limpiarApellidoNombre(ApellidoNombre):
     nombre = nombre.replace(", ","")
     return apellido,nombre
 
-"""ingresarMonto(con, "Bruno Ulises", "Fernandez", 5690)"""
+def listarTransacciones(request):
+    transacciones = Transaccion.objects.order_by('-id_transaccion')
+    return render(request, 'listaTransacciones.html', {'transacciones': transacciones})
 
-"""apellido = limpiarApellidoNombre("Fernandez, Bruno Ulises")
-print(apellido[1])"""
+def listarClientes(request):
+    clientes = Cliente.objects.order_by('-id_usuario')
+    return render(request, 'listaClientes.html', {'clientes': clientes})
 
-
-"""condicion = controlarSaldo(con,"Bruno Ulises","Fernandez",1000)
-print(condicion)"""
 
 
