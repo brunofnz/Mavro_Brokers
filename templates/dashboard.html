@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+	{% if user.is_authenticated %}
 	{% load static %}
 <head>
 	<meta charset="UTF-8">
@@ -7,6 +8,7 @@
 	<title>Dashboard</title>
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:300,400,500" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="{% static 'css/fontello.css' %}">
 	<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
 </head>
@@ -16,19 +18,25 @@
 			<div class="barra-lateral col-12 col-sm-auto">
 
 				<div class="logo">
-					<h2>Mavro Broker</h2>
+					<img src="{% static 'img/isotipo.png' %}" style="width: 80px; height: 80px; align-content: initial;">					
 				</div>
 				<nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
-					<a href="{% url 'dashboard' %}"><i class="icon-home"></i><span>Inicio</span></a>
-					<a href="{% url 'listaClientes' %}"><i class="icon-users"></i><span>Clientes</span></a>
-					<a href="{% url 'listaTransacciones' %}"><i class="icon-doc-text"></i><span>Transacciones</span></a>
-					<a href="#"><i class="icon-cog-alt"></i><span>Configuracion</span></a>
-					<a href="#"><i class="icon-logout"></i><span>Salir</span></a>
+					<a href="{% url 'dashboard' %}"><i class="material-icons">home</i><span>Inicio</span></a>
+					<a href=""><i class="material-icons">assessment</i><span>Acciones</span></a>
+					<a href="{% url 'listaClientes' %}"><i class="material-icons">person_outline</i><span>Clientes</span></a>
+					<a href="{% url 'listaTransacciones' %}"><i class="material-icons">description</i><span>Transacciones</span></a>
+					<a href="#"><i class="material-icons">settings</i><span>Configuracion</span></a>
+					<a href="{% url 'logout' %}"><i class="material-icons">power_settings_new</i><span>Salir</span></a>
 				</nav>
 			</div>
 
 			<main class="main col">
-				
+				<div class="row">
+					<div class="col">
+						<h2>Hola! {{ user.first_name }}</h2>
+					</div>
+				</div>
+
 				<div class="row">
 					<div class="columna col-lg-7 widget nueva_entrada">
 						{% block content %}
@@ -133,4 +141,5 @@
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
+{% endif %}
 </html>
