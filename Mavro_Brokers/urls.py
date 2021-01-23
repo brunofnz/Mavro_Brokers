@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', landingPage, name='landingPage'),
     path('dashboard/', dashboard, name="dashboard"),
-    path('dashboard/', include('apps.registrarTransacciones.urls'))
+    path('dashboard/', include('apps.registrarTransacciones.urls')),
+    path('accounts/', include('apps.accounts.urls'))
 ]
