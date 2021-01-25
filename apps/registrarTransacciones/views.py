@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Transaccion, Cliente
-from .forms import TransaccionForm, ClienteForm
+from .models import Transaccion, Cliente, Cierre
+from .forms import TransaccionForm, ClienteForm, CierreForm
 import sqlite3
 
 # Create your views here.
@@ -127,8 +127,26 @@ def listarTransacciones(request):
     return render(request, 'listaTransacciones.html', {'transacciones': transacciones})
 
 def listarClientes(request):
-    clientes = Cliente.objects.order_by('-id_usuario')
+    clientes = Cliente.objects.order_by('apellido')
     return render(request, 'listaClientes.html', {'clientes': clientes})
 
+def registrarCierre(request):
+    if request.method == 'POST':
+        cierre_form = CierreForm(request.POST)
+        if cierre_form.is_valid():
+            print("Formulario valido")
+            try:
+                cierre_form.save()
+            except(e):
+                print("hubo un error")
+                print(e)
+        return redirect('listaCierres')
+    else:
+        print("NO POST")
+        cierre_form = CierreForm()
+    return render(request,'registrarCierre.html',{'cierre_form':cierre_form})
 
+def listarCierres(request):
+    cierres = Cierre.objects.order_by('-id_cierre')
+    return render(request, 'listaCierres.html', {'cierres': cierres})
 

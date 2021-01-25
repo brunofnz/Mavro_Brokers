@@ -1,0 +1,32 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+
+    <div class="row justify-content-between">
+        <div class="col col-md-8">
+            <h2>Cierres </h2>
+        </div>
+        <div class="col col-md-4">
+            <a href="{% url 'registrarCierre' %}" class="btn btn-dark"> Registrar cierre</a>
+        </div>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Fecha realizada</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cierre in cierres %}
+            <tr>
+                <th scope="row">{{ cierre.id_cierre }}</th>
+                <td>{{ cierre.valor }}</td>
+                <td>{{ cierre.fecha_alta }}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock%}

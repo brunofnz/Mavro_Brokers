@@ -1,5 +1,5 @@
 from django import forms
-from .models import Transaccion, Cliente
+from .models import Transaccion, Cliente, Cierre
 
 class TransaccionForm(forms.ModelForm):
     opciones = [('ingresar','ingresar'),('egresar','egresar')]
@@ -22,4 +22,11 @@ class ClienteForm(forms.ModelForm):
             'telefono',
             'mail',
             'saldo'
+        ]
+
+class CierreForm(forms.ModelForm):
+    class Meta:
+        model = Cierre
+        fields = [
+            'valor'
         ]
